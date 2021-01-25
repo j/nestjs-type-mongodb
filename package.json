@@ -1,0 +1,83 @@
+{
+  "name": "nestjs-type-mongodb",
+  "version": "1.0.0-beta.0",
+  "description": "A nest.js module for type-mongodb",
+  "repository": "https://github.com/j/nestjs-type-mongodb",
+  "keywords": [
+    "orm",
+    "odm",
+    "mongo",
+    "mongodb",
+    "ts",
+    "typescript",
+    "javascript",
+    "entity",
+    "ddd",
+    "data-mapper",
+    "type-mongodb",
+    "nestjs",
+    "nest",
+    "nest.js"
+  ],
+  "author": "Jordan Stout <j@jrdn.org>",
+  "license": "MIT",
+  "files": [
+    "lib/**/*"
+  ],
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "clean": "rimraf lib",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "watch": "tsc -w",
+    "pretty": "prettier '{src,tests}/**/*.ts' --write",
+    "prepublishOnly": "yarn build",
+    "release:next": "npm publish --access public --tag next",
+    "release": "release-it",
+    "mongo-start": "MONGODB_VERSION=4.0.x mongodb-runner start --topology=replicaset --name=test --port=31000",
+    "mongo-stop": "mongodb-runner stop --topology=replicaset --name=test",
+    "test:e2e": "jest --config ./tests/jest-e2e.json --runInBand --coverage",
+    "test:e2e:dev": "npm run test:e2e --watchAll"
+  },
+  "devDependencies": {
+    "@nestjs/common": "^7.6.5",
+    "@nestjs/core": "^7.6.5",
+    "@nestjs/platform-express": "^7.6.5",
+    "@nestjs/testing": "^7.6.5",
+    "@types/jest": "^26.0.3",
+    "@types/mongodb": "3.5.25",
+    "@types/supertest": "^2.0.10",
+    "husky": "^4.2.5",
+    "jest": "^26.1.0",
+    "mongodb": "3.x.x",
+    "mongodb-runner": "^4.7.2",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1",
+    "reflect-metadata": "^0.1.13",
+    "release-it": "^14.2.2",
+    "rxjs": "^6.6.3",
+    "supertest": "^6.1.2",
+    "ts-jest": "^26.1.1",
+    "type-mongodb": "^1.0.0-beta",
+    "typescript": "^4.1.3"
+  },
+  "peerDependencies": {
+    "reflect-metadata": "^0.1.13",
+    "type-mongodb": "^1.0.0-beta"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "none"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "release-it": {
+    "commitMessage": "chore: release v${version}",
+    "github": {
+      "release": true
+    }
+  }
+}
