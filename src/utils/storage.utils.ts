@@ -1,13 +1,10 @@
-import { DocumentClass, DocumentManager } from 'type-mongodb';
+import { Constructor, DocumentManager } from 'type-mongodb';
 
 export class Storage {
-  private static documents = new Map<string, Set<DocumentClass>>();
+  private static documents = new Map<string, Set<Constructor>>();
   private static dms = new Map<string, DocumentManager>();
 
-  static addDocuments(
-    documents: DocumentClass[],
-    connectionName: string
-  ): void {
+  static addDocuments(documents: Constructor[], connectionName: string): void {
     if (!this.documents.has(connectionName)) {
       this.documents.set(connectionName, new Set(documents));
     } else {
@@ -17,7 +14,7 @@ export class Storage {
     }
   }
 
-  static getDocuments(connectionName: string): DocumentClass[] {
+  static getDocuments(connectionName: string): Constructor[] {
     if (!this.documents.has(connectionName)) {
       throw new Error(
         `Documents for connection "${connectionName}" do not exist`

@@ -30,7 +30,7 @@ export class TypeMongoDBCoreModule implements OnApplicationShutdown {
       Storage.getDocumentManagers().map(
         (dm) =>
           new Promise((resolve, reject) => {
-            if (dm && dm.isConnected()) {
+            if (dm) {
               try {
                 resolve(dm.close());
               } catch (e) {

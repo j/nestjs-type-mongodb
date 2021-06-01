@@ -1,5 +1,5 @@
 import { DynamicModule, Global, Module, Provider } from '@nestjs/common';
-import { DocumentClass, DocumentManager, Newable } from 'type-mongodb';
+import { Constructor, DocumentManager } from 'type-mongodb';
 import { getDocumentManagerToken, getRepositoryToken, Storage } from './utils';
 import { TYPE_MONGODB_DEFAULT_CONNECTION } from './type-mongodb.constants';
 
@@ -7,7 +7,7 @@ import { TYPE_MONGODB_DEFAULT_CONNECTION } from './type-mongodb.constants';
 @Module({})
 export class TypeMongoDBFeatureModule {
   static register(
-    documents: DocumentClass[],
+    documents: Constructor[],
     connectionName: string = TYPE_MONGODB_DEFAULT_CONNECTION
   ): DynamicModule {
     Storage.addDocuments(documents, connectionName);
@@ -22,7 +22,7 @@ export class TypeMongoDBFeatureModule {
   }
 
   private static createDocumentProviders(
-    documents: Newable[],
+    documents: Constructor[],
     connectionName: string = TYPE_MONGODB_DEFAULT_CONNECTION
   ): Provider[] {
     const providers: Provider[] = [];

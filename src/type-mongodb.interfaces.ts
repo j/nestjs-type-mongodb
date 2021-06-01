@@ -1,10 +1,12 @@
 import { ModuleMetadata, Type } from '@nestjs/common/interfaces';
-import { DocumentManagerOptions } from 'type-mongodb';
+import {
+  DocumentManagerOptionsUsingUri,
+  DocumentManagerOptionsUsingClient
+} from 'type-mongodb';
 
-export type TypeMongoDBModuleOptions = Omit<
-  DocumentManagerOptions,
-  'documents'
->;
+export type TypeMongoDBModuleOptions =
+  | Omit<DocumentManagerOptionsUsingUri, 'documents'>
+  | Omit<DocumentManagerOptionsUsingClient, 'documents'>;
 
 export interface TypeMongoDBOptionsFactory {
   createTypeMongoDBOptions():

@@ -1,5 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { Newable } from 'type-mongodb';
+import { Constructor } from 'type-mongodb';
 import {
   TypeMongoDBModuleOptions,
   TypeMongoDBModuleAsyncOptions
@@ -31,7 +31,7 @@ export class TypeMongoDBModule {
   }
 
   static forFeature(
-    documents: Newable[],
+    documents: Constructor[],
     connectionName?: string
   ): DynamicModule {
     return {
