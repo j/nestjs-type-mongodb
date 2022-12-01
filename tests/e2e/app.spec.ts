@@ -20,11 +20,8 @@ class ConfigService implements TypeMongoDBOptionsFactory {
 
   createTypeMongoDBOptions(): TypeMongoDBModuleOptions {
     return {
-      connection: {
-        uri:
-          'mongodb://localhost:31000,localhost:31001,localhost:31002/type_mongodb?replicaSet=test',
-        database: 'type_mongodb'
-      }
+      uri:
+        'mongodb://localhost:27017,localhost:27018,localhost:27019/type_mongodb?replicaSet=replicaset'
     };
   }
 
@@ -37,11 +34,8 @@ class ConfigService implements TypeMongoDBOptionsFactory {
   imports: [
     TypeMongoDBModule.forRoot(
       {
-        connection: {
-          uri:
-            'mongodb://localhost:31000,localhost:31001,localhost:31002/type_mongodb_second?replicaSet=test',
-          database: 'type_mongodb_second'
-        }
+        uri:
+          'mongodb://localhost:27017,localhost:27018,localhost:27019/type_mongodb_second?replicaSet=replicaset'
       },
       'second'
     ),
@@ -58,20 +52,14 @@ describe('App', () => {
     const module = await Test.createTestingModule({
       imports: [
         TypeMongoDBModule.forRoot({
-          connection: {
-            uri:
-              'mongodb://localhost:31000,localhost:31001,localhost:31002/type_mongodb?replicaSet=test',
-            database: 'type_mongodb'
-          }
+          uri:
+            'mongodb://localhost:27017,localhost:27018,localhost:27019/type_mongodb?replicaSet=replicaset'
         }),
         TypeMongoDBModule.forRootAsync(
           {
             useFactory: () => ({
-              connection: {
-                uri:
-                  'mongodb://localhost:31000,localhost:31001,localhost:31002/type_mongodb_second?replicaSet=test',
-                database: 'type_mongodb_second'
-              }
+              uri:
+                'mongodb://localhost:27017,localhost:27018,localhost:27019/type_mongodb_second?replicaSet=replicaset'
             })
           },
           'second'
@@ -84,7 +72,7 @@ describe('App', () => {
     // validate first DM created with proper models
     const dm1 = module.get<DocumentManager>(getDocumentManagerToken());
     expect(dm1).toBeInstanceOf(DocumentManager);
-    expect(dm1.client().db().databaseName).toBe('type_mongodb');
+    expect(dm1.client.db().databaseName).toBe('type_mongodb');
     const metadata1 = [...dm1.metadataFactory.loadedDocumentMetadata.values()];
     expect(metadata1).toHaveLength(1);
     expect(metadata1[0].name).toEqual('Dog');
@@ -92,7 +80,7 @@ describe('App', () => {
     // validate second DM created with proper models
     const dm2 = module.get<DocumentManager>(getDocumentManagerToken('second'));
     expect(dm2).toBeInstanceOf(DocumentManager);
-    expect(dm2.client().db().databaseName).toBe('type_mongodb_second');
+    expect(dm2.client.db().databaseName).toBe('type_mongodb_second');
     const metadata2 = [...dm2.metadataFactory.loadedDocumentMetadata.values()];
     expect(metadata2).toHaveLength(1);
     expect(metadata2[0].name).toEqual('Cat');
@@ -114,7 +102,7 @@ describe('App', () => {
     // validate first DM created with proper models
     const dm = module.get<DocumentManager>(getDocumentManagerToken());
     expect(dm).toBeInstanceOf(DocumentManager);
-    expect(dm.client().db().databaseName).toBe('type_mongodb');
+    expect(dm.client.db().databaseName).toBe('type_mongodb');
     const metadata1 = [...dm.metadataFactory.loadedDocumentMetadata.values()];
     expect(metadata1).toHaveLength(1);
     expect(metadata1[0].name).toEqual('Dog');
@@ -137,7 +125,7 @@ describe('App', () => {
     // validate first DM created with proper models
     const dm1 = module.get<DocumentManager>(getDocumentManagerToken());
     expect(dm1).toBeInstanceOf(DocumentManager);
-    expect(dm1.client().db().databaseName).toBe('type_mongodb');
+    expect(dm1.client.db().databaseName).toBe('type_mongodb');
     const metadata1 = [...dm1.metadataFactory.loadedDocumentMetadata.values()];
     expect(metadata1).toHaveLength(1);
     expect(metadata1[0].name).toEqual('Dog');
@@ -145,7 +133,7 @@ describe('App', () => {
     // validate second DM created with proper models
     const dm2 = module.get<DocumentManager>(getDocumentManagerToken('second'));
     expect(dm2).toBeInstanceOf(DocumentManager);
-    expect(dm2.client().db().databaseName).toBe('type_mongodb_second');
+    expect(dm2.client.db().databaseName).toBe('type_mongodb_second');
     const metadata2 = [...dm2.metadataFactory.loadedDocumentMetadata.values()];
     expect(metadata2).toHaveLength(1);
     expect(metadata2[0].name).toEqual('Cat');

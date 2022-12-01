@@ -34,8 +34,6 @@
     "prepublishOnly": "yarn build",
     "release:next": "npm publish --access public --tag next",
     "release": "release-it",
-    "mongo-start": "MONGODB_VERSION=4.4.x mongodb-runner start --topology=replicaset --name=test --port=31000",
-    "mongo-stop": "mongodb-runner stop --topology=replicaset --name=test",
     "test:e2e": "jest --config ./tests/jest-e2e.json --runInBand --coverage",
     "test:e2e:dev": "npm run test:e2e --watchAll"
   },
@@ -48,8 +46,7 @@
     "@types/supertest": "^2.0.10",
     "husky": "^4.2.5",
     "jest": "^26.1.0",
-    "mongodb": "^4.0.0-beta.4",
-    "mongodb-runner": "^4.7.2",
+    "mongodb": "^4.12.1",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
     "reflect-metadata": "^0.1.13",
@@ -57,12 +54,12 @@
     "rxjs": "^6.6.3",
     "supertest": "^6.1.2",
     "ts-jest": "^26.1.1",
-    "type-mongodb": "^2.0.0-beta.4",
+    "type-mongodb": "^2.0.0-beta.11",
     "typescript": "^4.1.3"
   },
   "peerDependencies": {
     "reflect-metadata": "^0.1.13",
-    "type-mongodb": "^2.0.0-beta.4"
+    "type-mongodb": ">=2.0.0-beta.0"
   },
   "prettier": {
     "singleQuote": true,

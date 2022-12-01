@@ -8,19 +8,13 @@ import { AppController } from './app.controller';
 @Module({
   imports: [
     TypeMongoDBModule.forRoot({
-      connection: {
-        uri:
-          'mongodb://localhost:31000,localhost:31001,localhost:31002/type_mongodb?replicaSet=test',
-        database: 'type_mongodb'
-      }
+      uri:
+        'mongodb://localhost:27017,localhost:27018,localhost:27019/type_mongodb?replicaSet=replicaset'
     }),
     TypeMongoDBModule.forRoot(
       {
-        connection: {
-          uri:
-            'mongodb://localhost:31000,localhost:31001,localhost:31002/type_mongodb_second?replicaSet=test',
-          database: 'type_mongodb_second'
-        }
+        uri:
+          'mongodb://localhost:27017,localhost:27018,localhost:27019/type_mongodb_second?replicaSet=replicaset'
       },
       'second'
     ),
