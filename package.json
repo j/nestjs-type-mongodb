@@ -1,6 +1,6 @@
 {
   "name": "nestjs-type-mongodb",
-  "version": "2.0.0-beta.3",
+  "version": "2.0.0-beta.4",
   "description": "A nest.js module for type-mongodb",
   "repository": "https://github.com/j/nestjs-type-mongodb",
   "keywords": [
