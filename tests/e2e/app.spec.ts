@@ -20,8 +20,7 @@ class ConfigService implements TypeMongoDBOptionsFactory {
 
   createTypeMongoDBOptions(): TypeMongoDBModuleOptions {
     return {
-      uri:
-        'mongodb://localhost:27017,localhost:27018,localhost:27019/type_mongodb?replicaSet=replicaset'
+      uri: 'mongodb://localhost:27017,localhost:27018,localhost:27019/type_mongodb?replicaSet=replicaset'
     };
   }
 
@@ -34,8 +33,7 @@ class ConfigService implements TypeMongoDBOptionsFactory {
   imports: [
     TypeMongoDBModule.forRoot(
       {
-        uri:
-          'mongodb://localhost:27017,localhost:27018,localhost:27019/type_mongodb_second?replicaSet=replicaset'
+        uri: 'mongodb://localhost:27017,localhost:27018,localhost:27019/type_mongodb_second?replicaSet=replicaset'
       },
       'second'
     ),
@@ -52,14 +50,12 @@ describe('App', () => {
     const module = await Test.createTestingModule({
       imports: [
         TypeMongoDBModule.forRoot({
-          uri:
-            'mongodb://localhost:27017,localhost:27018,localhost:27019/type_mongodb?replicaSet=replicaset'
+          uri: 'mongodb://localhost:27017,localhost:27018,localhost:27019/type_mongodb?replicaSet=replicaset'
         }),
         TypeMongoDBModule.forRootAsync(
           {
             useFactory: () => ({
-              uri:
-                'mongodb://localhost:27017,localhost:27018,localhost:27019/type_mongodb_second?replicaSet=replicaset'
+              uri: 'mongodb://localhost:27017,localhost:27018,localhost:27019/type_mongodb_second?replicaSet=replicaset'
             })
           },
           'second'
